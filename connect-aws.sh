@@ -53,18 +53,25 @@ done
 echo "✅ All repositories are up to date in '$FOLDER_NAME'."
 
 # @user Prompt for .env file and copy it to each repository
-read -p "📂 Please provide the path to your .env file: " ENV_FILE
-if [[ ! -f "$ENV_FILE" ]]; then
-    echo "❌ Error: Provided .env file does not exist."
-    exit 1
+# @user Prompt for .env file but allow skipping
+read -p "📂 Please provide the path to your .env file (or press Enter to skip): " ENV_FILE
+if [[ -n "$ENV_FILE" ]]; then
+    if [[ ! -f "$ENV_FILE" ]]; then
+        echo "❌ Error: Provided .env file does not exist."
+        exit 1
+    fi
+
+    for REPO_URL in "${REPO_URLS[@]}"; do
+        REPO_NAME=$(basename "$REPO_URL" .git)
+        REPO_PATH="$FOLDER_NAME/$REPO_NAME"
+        cp "$ENV_FILE" "$REPO_PATH/.env"
+        echo "✅ .env file copied to '$REPO_NAME'."
+    done
+else
+    echo "⚠️ Skipping .env file copying as no file was provided."
 fi
 
-for REPO_URL in "${REPO_URLS[@]}"; do
-    REPO_NAME=$(basename "$REPO_URL" .git)
-    REPO_PATH="$FOLDER_NAME/$REPO_NAME"
-    cp "$ENV_FILE" "$REPO_PATH/.env"
-    echo "✅ .env file copied to '$REPO_NAME'."
-done
+
 
 if [[ "$USE_AWS" == "true" ]]; then
     # @dev AWS-specific deployment
