@@ -1,0 +1,12 @@
+# Ignore everything inside the company directory
+company/**
+
+# Allow keeping the company folder itself (optional, only works if empty)
+!company/
+
+# Ignore all .pem files
+*.pem
+
+# Ignore sensitive files
+.myEnv
+config.cfg
