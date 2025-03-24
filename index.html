@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deployment Script</title>
+    <title>Skaya Deployment Script</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -36,12 +36,28 @@
         ul li {
             margin-bottom: 5px;
         }
+        .links {
+            margin-top: 20px;
+        }
+        .links a {
+            display: block;
+            margin: 5px 0;
+            padding: 10px;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .links a:hover {
+            background: #0056b3;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🚀 Deployment Script</h1>
-        <p>This script automates the process of cloning GitHub repositories, setting up a project directory, and deploying it to an EC2 instance. It uses a configuration file (<code>config.cfg</code>) to eliminate manual inputs.</p>
+        <h1>🚀 Skaya Deployment Script</h1>
+        <p>Skaya is a technology company that provides a complete ecosystem with a custom SDK, frontend, and backend solutions. This deployment script automates the process of cloning Skaya repositories, setting up a project directory, and deploying it to an EC2 instance. It uses a configuration file (<code>config.cfg</code>) to eliminate manual inputs.</p>
 
         <h2>📌 Prerequisites</h2>
         <ul>
@@ -54,12 +70,12 @@
         <p>Create a <code>config.cfg</code> file in the same directory as the script with the following format:</p>
         <pre><code>PEM_FILE=/path/to/key.pem
 EC2_IP=your.ec2.ip.address
-FOLDER_NAME=company
+FOLDER_NAME=skaya
 REPO_URLS=https://github.com/skaya-labs/frontend.git,https://github.com/skaya-labs/backend.git
 USE_AWS=false (true if want to upload to server)</code></pre>
 
-        <h2>📚 Directory Structure</h2>
-        <p>The script ensures that both frontend and backend repositories contain a <code>package.json</code> file with <code>npm build</code>, <code>npm start</code>, and <code>npm run dev</code> commands for proper setup and execution.</p>
+        <h2>📚 Skaya Ecosystem Directory Structure</h2>
+        <p>The script ensures that the frontend, backend, and SDK repositories contain a <code>package.json</code> file with <code>npm build</code>, <code>npm start</code>, and <code>npm run dev</code> commands for proper setup and execution.</p>
 
         <h2>🔄 .env File Handling</h2>
         <ul>
@@ -76,6 +92,13 @@ USE_AWS=false (true if want to upload to server)</code></pre>
         <pre><code>./connect-aws.sh</code></pre>
 
         <p>The script selects the appropriate branch or environment (<code>dev</code>, <code>prod</code>, or <code>stage</code>) based on the <code>ENVIRONMENT</code> variable in <code>config.cfg</code>. It ensures that the correct configuration is used when running the project.</p>
+
+        <h2>🔗 Skaya Ecosystem Links</h2>
+        <div class="links">
+            <a href="https://github.com/skaya-labs/frontend.git" target="_blank">🌐 Skaya Frontend</a>
+            <a href="https://github.com/skaya-labs/backend.git" target="_blank">🛠️ Skaya Backend</a>
+            <a href="https://github.com/skaya-labs/sdk.git" target="_blank">📦 Skaya SDK</a>
+        </div>
     </div>
 </body>
 </html>
