@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deployment Script</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background: #eee;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: "Courier New", monospace;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Deployment Script</h1>
+        <p>This script automates the process of cloning GitHub repositories, setting up a project directory, and deploying it to an EC2 instance. It uses a configuration file (<code>config.cfg</code>) to eliminate manual inputs.</p>
+
+        <h2>📌 Prerequisites</h2>
+        <ul>
+            <li>✅ A valid <code>.pem</code> file for SSH access to the EC2 instance.</li>
+            <li>✅ An EC2 instance with Ubuntu and necessary permissions.</li>
+            <li>✅ Git and Node.js installed on both local and remote environments.</li>
+        </ul>
+
+        <h2>⚙️ Configuration</h2>
+        <p>Create a <code>config.cfg</code> file in the same directory as the script with the following format:</p>
+        <pre><code>PEM_FILE=/path/to/key.pem
+EC2_IP=your.ec2.ip.address
+FOLDER_NAME=company
+REPO_URLS=https://github.com/skaya-labs/frontend.git,https://github.com/skaya-labs/backend.git
+USE_AWS=false (true if want to upload to server)</code></pre>
+
+        <h2>📚 Directory Structure</h2>
+        <p>The script ensures that both frontend and backend repositories contain a <code>package.json</code> file with <code>npm build</code>, <code>npm start</code>, and <code>npm run dev</code> commands for proper setup and execution.</p>
+
+        <h2>🔄 .env File Handling</h2>
+        <ul>
+            <li>✅ If a <code>.env</code> file is provided, it is copied into each cloned repository.</li>
+            <li>✅ If no <code>.env</code> file is provided, the script continues execution without copying it.</li>
+            <li>✅ To skip <code>.env</code> copying, simply press Enter when prompted.</li>
+        </ul>
+
+        <h2>🛠️ How to Use This Script</h2>
+        <h3>1️⃣ Give execution permissions</h3>
+        <pre><code>chmod +x connect-aws.sh</code></pre>
+
+        <h3>2️⃣ Run the script</h3>
+        <pre><code>./connect-aws.sh</code></pre>
+
+        <p>The script selects the appropriate branch or environment (<code>dev</code>, <code>prod</code>, or <code>stage</code>) based on the <code>ENVIRONMENT</code> variable in <code>config.cfg</code>. It ensures that the correct configuration is used when running the project.</p>
+    </div>
+</body>
+</html>
