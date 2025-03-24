@@ -15,7 +15,7 @@ PEM_FILE=/path/to/key.pem
 EC2_IP=your.ec2.ip.address
 FOLDER_NAME=company
 REPO_URLS=https://github.com/user/repo1.git,https://github.com/user/repo2.git
-USE_AWS=false
+USE_AWS=false (true if want to upload to server)
 ```
 
 ### **How to Use This Script**
