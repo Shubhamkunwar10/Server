@@ -50,4 +50,4 @@ chmod +x connect-aws.sh
 
 The script selects the appropriate branch or environment (dev, prod, or stage) based on the ENVIRONMENT variable in config.cfg. It ensures that the correct configuration is used when running the project.
 
-scp -i my-bot-key-pem.pem Projects/Insta-bot/insta-bot.sh ec2-user@54.91.51.176:~/projects/skaya-labs/
+scp -i skaya.pem Projects/Insta-bot/insta-bot.sh ec2-user@54.91.51.176:~/projects/skaya-labs/
