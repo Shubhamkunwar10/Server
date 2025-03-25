@@ -10,3 +10,5 @@ company/**
 # Ignore sensitive files
 .myEnv
 config.cfg
+
+.env
