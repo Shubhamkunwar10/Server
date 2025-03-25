@@ -1,6 +1,14 @@
-# Deployment Script
+# Skaya Deployment Guide
+- This guide explains how to deploy your project using Skaya's automated deployment script. Users have two options
+
+1. Use Skaya's Custom Frontend & Backend: Deploy our pre-built frontend and backend, then modify the code later as needed.
+
+2. Use Your Own Repositories: Specify custom repositories in the configuration file and deploy your own projects.
+
+## Deployment Script
 
 This script automates the process of cloning GitHub repositories, setting up a project directory, and deploying it to an EC2 instance. It uses a configuration file (`config.cfg`) to eliminate manual inputs.
+
 
 ## 📌 Prerequisites
 - ✅ A valid `.pem` file for SSH access to the EC2 instance.
@@ -50,4 +58,8 @@ chmod +x connect-aws.sh
 
 The script selects the appropriate branch or environment (dev, prod, or stage) based on the ENVIRONMENT variable in config.cfg. It ensures that the correct configuration is used when running the project.
 
+To manually transfer files, use:
+
+```bash
 scp -i skaya.pem Projects/Insta-bot/insta-bot.sh ec2-user@54.91.51.176:~/projects/skaya-labs/
+```
