@@ -1,5 +1,5 @@
 # Skaya Deployment Guide
-- This guide explains how to deploy your project using Skaya's automated deployment script. Users have two options
+- This guide explains how to deploy your project using Skaya's automated deployment script with two flexible options:
 
 1. Use Skaya's Custom Frontend & Backend: Deploy our pre-built frontend and backend, then modify the code later as needed.
 
@@ -24,6 +24,14 @@ EC2_IP=your.ec2.ip.address
 FOLDER_NAME=company
 REPO_URLS=https://github.com/skaya-labs/frontend.git,https://github.com/skaya-labs/backend.git
 USE_AWS=false (true if want to upload to server)
+```
+## Using Custom Repositories
+
+
+If you prefer to use your own repositories, update the REPO_URLS field with your GitHub repository URLs:
+
+```ini
+REPO_URLS=https://github.com/your-org/custom-frontend.git,https://github.com/your-org/custom-backend.git
 ```
 
 ## 📚 Directory Structure
@@ -61,7 +69,7 @@ The script selects the appropriate branch or environment (dev, prod, or stage) b
 ### Running and starting the aws for server
 
 ```bash
-ssh -i skaya.pem ec2-user@52.87.181.117
+ssh -i skaya.pem ec2-user@@your_public_ip_address
 ```
 
 If permission error:
@@ -72,5 +80,5 @@ chmod 400 skaya.pem
 ### To manually transfer files, use:
 
 ```bash
-scp -i skaya.pem Projects/Insta-bot/insta-bot.sh ec2-user@52.87.181.117:~/projects/skaya-labs/
+scp -i skaya.pem Projects/Insta-bot/insta-bot.sh ec2-user@your_public_ip_address:~/projects/skaya-labs/
 ```
