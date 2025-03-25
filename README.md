@@ -102,3 +102,5 @@ chmod 400 skaya.pem
 ```bash
 scp -i skaya.pem Projects/Insta-bot/insta-bot.sh ec2-user@your_public_ip_address:~/projects/skaya-labs/
 ```
+
+scp -i skaya.pem installer.sh ec2-user@18.212.190.235:~/installer.sh/
