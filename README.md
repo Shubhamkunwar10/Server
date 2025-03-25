@@ -19,14 +19,32 @@ This script automates the process of cloning GitHub repositories, setting up a p
 Create a `config.cfg` file in the same directory as the script with the following format:
 
 ```ini
+# Required Configuration
 PEM_FILE=/path/to/key.pem
 EC2_IP=your.ec2.ip.address
 FOLDER_NAME=company
-REPO_URLS=https://github.com/skaya-labs/frontend.git,https://github.com/skaya-labs/backend.git
 USE_AWS=false (true if want to upload to server)
+# Repository Configuration
+REPO_URLS=https://github.com/skaya-labs/frontend.git,https://github.com/skaya-labs/backend.git
+# Environment Configuration
+ENVIRONMENT=dev # Options: dev, stage, prod (default: prod)
 ```
 ## Using Custom Repositories
 
+### 📂 Repository Requirements
+All repositories must contain:
+- 1. package.json with these required scripts:
+```
+{
+  "scripts": {
+    "build": "...",
+    "start": "...",
+    "dev": "...",
+    "stage": "..."
+  }
+}
+```
+- 2. Proper environment variables (via .env or other configuration)
 
 If you prefer to use your own repositories, update the REPO_URLS field with your GitHub repository URLs:
 
@@ -49,6 +67,7 @@ The script ensures that both frontend and backend repositories contain a package
 ## **Clone the repo**
 ```bash
 git clone https://github.com/skaya-labs/aws-server
+cd aws-server
 ```
 
 ### **How to Use This Script**
@@ -56,6 +75,7 @@ git clone https://github.com/skaya-labs/aws-server
 1️⃣ **Give execution permissions**
 ```bash
 chmod +x connect-aws.sh
+chmod 400 your-key.pem  # Ensure PEM file is secure
 ```
 
 2️⃣ **Run the script**

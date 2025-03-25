@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skaya Deployment Script</title>
+    <title>Skaya Deployment Guide</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,28 +11,62 @@
         }
         .container {
             background: #fff;
-            padding: 20px;
+            padding: 25px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin: 0 auto;
         }
         h1, h2, h3 {
             color: #333;
         }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        h2 {
+            margin-top: 25px;
+            border-left: 4px solid #007bff;
+            padding-left: 10px;
+        }
         pre {
-            background: #eee;
-            padding: 10px;
+            background: #f8f9fa;
+            padding: 15px;
             border-radius: 5px;
             overflow-x: auto;
+            border-left: 3px solid #007bff;
         }
         code {
             font-family: "Courier New", monospace;
+            background: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
         }
         ul {
-            list-style-type: none;
-            padding: 0;
+            padding-left: 20px;
         }
         ul li {
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 15px;
+        }
+        ul li:before {
+            content: "•";
+            color: #007bff;
+            position: absolute;
+            left: 0;
+        }
+        .option-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #007bff;
+        }
+        .option-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #007bff;
         }
         .links {
             margin-top: 20px;
@@ -46,68 +80,108 @@
             text-decoration: none;
             border-radius: 5px;
             text-align: center;
+            transition: background 0.3s;
         }
         .links a:hover {
             background: #0056b3;
+        }
+        .emoji {
+            margin-right: 5px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🚀 Skaya Labs Deployment Script
-            <a href="https://github.com/skaya-labs" target="_blank" style="text-decoration: none; color: inherit;">
-                🔗
-            </a> 
-        </h1>
-        <p>
-            🌍 Skaya Labs
-            is a technology company that provides a complete ecosystem with a custom SDK, frontend, and backend solutions. 
-            This deployment script automates the process of cloning Skaya Labs repositories, setting up a project directory, 
-            and deploying it to an EC2 instance. It uses a configuration file (<code>config.cfg</code>) to eliminate manual inputs.
-        </p>
+        <h1><span class="emoji">🚀</span>Skaya Deployment Guide</h1>
+        <p>This guide explains how to deploy your project using Skaya's automated deployment script with two flexible options:</p>
         
-        <h2>📌 Prerequisites</h2>
+        <div class="option-card">
+            <div class="option-title">1. Use Skaya's Custom Frontend & Backend</div>
+            <p>Deploy our pre-built frontend and backend, then modify the code later as needed.</p>
+        </div>
+        
+        <div class="option-card">
+            <div class="option-title">2. Use Your Own Repositories</div>
+            <p>Specify custom repositories in the configuration file and deploy your own projects.</p>
+        </div>
+
+        <h2><span class="emoji">⚙️</span>Deployment Script</h2>
+        <p>This script automates the process of cloning GitHub repositories, setting up a project directory, and deploying it to an EC2 instance. It uses a configuration file (<code>config.cfg</code>) to eliminate manual inputs.</p>
+
+        <h2><span class="emoji">📌</span>Prerequisites</h2>
         <ul>
-            <li>✅ A valid <code>.pem</code> file for SSH access to the EC2 instance.</li>
-            <li>✅ An EC2 instance with Ubuntu and necessary permissions.</li>
-            <li>✅ Git and Node.js installed on both local and remote environments.</li>
+            <li>A valid <code>.pem</code> file for SSH access to the EC2 instance.</li>
+            <li>An EC2 instance with Ubuntu and necessary permissions.</li>
+            <li>Git and Node.js installed on both local and remote environments.</li>
         </ul>
 
-        <h2>⚙️ Configuration</h2>
+        <h2><span class="emoji">⚙️</span>Configuration</h2>
         <p>Create a <code>config.cfg</code> file in the same directory as the script with the following format:</p>
-        <pre><code>PEM_FILE=/path/to/key.pem
+        <pre><code># Required Configuration
+PEM_FILE=/path/to/key.pem
 EC2_IP=your.ec2.ip.address
-FOLDER_NAME=skaya
+FOLDER_NAME=company
+USE_AWS=false (true if want to upload to server)
+# Repository Configuration
 REPO_URLS=https://github.com/skaya-labs/frontend.git,https://github.com/skaya-labs/backend.git
-USE_AWS=false (true if want to upload to server)</code></pre>
+# Environment Configuration
+ENVIRONMENT=dev # Options: dev, stage, prod (default: prod)</code></pre>
 
-        <h2>📚 Skaya Ecosystem Directory Structure</h2>
-        <p>The script ensures that the frontend, backend, and SDK repositories contain a <code>package.json</code> file with <code>npm build</code>, <code>npm start</code>, and <code>npm run dev</code> commands for proper setup and execution.</p>
+        <h2><span class="emoji">📂</span>Using Custom Repositories</h2>
+        <h3>Repository Requirements</h3>
+        <p>All repositories must contain:</p>
+        <ol>
+            <li><code>package.json</code> with these required scripts:</li>
+            <pre><code>{
+  "scripts": {
+    "install": "...",
+    "build": "...",
+    "start": "...",
+    "dev": "...",
+    "stage": "..."
+  }
+}</code></pre>
+            <li>Proper environment variables (via <code>.env</code> or other configuration)</li>
+        </ol>
 
-        <h2>🔄 .env File Handling</h2>
+        <p>If you prefer to use your own repositories, update the REPO_URLS field with your GitHub repository URLs:</p>
+        <pre><code>REPO_URLS=https://github.com/your-org/custom-frontend.git,https://github.com/your-org/custom-backend.git</code></pre>
+
+        <h2><span class="emoji">📚</span>Directory Structure</h2>
+        <p>The script ensures that both frontend and backend repositories contain a package.json file with npm build, npm start, and npm run dev commands for proper setup and execution.</p>
+
+        <h2><span class="emoji">🔄</span>.env File Handling</h2>
         <ul>
-            <li>✅ If a <code>.env</code> file is provided, it is copied into each cloned repository.</li>
-            <li>✅ If no <code>.env</code> file is provided, the script continues execution without copying it.</li>
-            <li>✅ To skip <code>.env</code> copying, simply press Enter when prompted.</li>
+            <li>If a <code>.env</code> file is provided, it is copied into each cloned repository.</li>
+            <li>If no <code>.env</code> file is provided, the script continues execution without copying it.</li>
+            <li>To skip <code>.env</code> copying, simply press Enter when prompted.</li>
         </ul>
 
-        <h2> Clone the repo</h2>
-        <pre><code>git clone https://github.com/skaya-labs/aws-server</code></pre>
+        <h2><span class="emoji">📥</span>Clone the repo</h2>
+        <pre><code>git clone https://github.com/skaya-labs/aws-server
+cd aws-server</code></pre>
 
-        <h2>🛠️ How to Use This Script</h2>
+        <h2><span class="emoji">🛠️</span>How to Use This Script</h2>
         <h3>1️⃣ Give execution permissions</h3>
-        <pre><code>chmod +x connect-aws.sh</code></pre>
+        <pre><code>chmod +x connect-aws.sh
+chmod 400 your-key.pem  # Ensure PEM file is secure</code></pre>
 
         <h3>2️⃣ Run the script</h3>
         <pre><code>./connect-aws.sh</code></pre>
 
-        <p>The script selects the appropriate branch or environment (<code>dev</code>, <code>prod</code>, or <code>stage</code>) based on the <code>ENVIRONMENT</code> variable in <code>config.cfg</code>. It ensures that the correct configuration is used when running the project.</p>
+        <p>The script selects the appropriate branch or environment (dev, prod, or stage) based on the ENVIRONMENT variable in config.cfg. It ensures that the correct configuration is used when running the project.</p>
 
-        <h2>🔗 Skaya Ecosystem Links</h2>
+        <h2><span class="emoji">🚦</span>Running and starting the aws for server</h2>
+        <pre><code>ssh -i skaya.pem ec2-user@@your_public_ip_address</code></pre>
+
+        <p>If permission error:</p>
+        <pre><code>chmod 400 skaya.pem</code></pre>
+
+        <h2><span class="emoji">📤</span>To manually transfer files, use:</h2>
+        <pre><code>scp -i skaya.pem Projects/Insta-bot/insta-bot.sh ec2-user@your_public_ip_address:~/projects/skaya-labs/</code></pre>
+
         <div class="links">
-            <a href="https://github.com/skaya-labs/frontend.git" target="_blank">🌐 Skaya Frontend</a>
-            <a href="https://github.com/skaya-labs/backend.git" target="_blank">🛠️ Skaya Backend</a>
-            <a href="https://github.com/skaya-labs/sdk.git" target="_blank">📦 Skaya SDK</a>
+            <a href="https://github.com/skaya-labs" target="_blank">🌐 Visit Skaya Labs GitHub</a>
         </div>
     </div>
 </body>
