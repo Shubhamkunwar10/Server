@@ -58,8 +58,19 @@ chmod +x connect-aws.sh
 
 The script selects the appropriate branch or environment (dev, prod, or stage) based on the ENVIRONMENT variable in config.cfg. It ensures that the correct configuration is used when running the project.
 
-To manually transfer files, use:
+### Running and starting the aws for server
 
 ```bash
-scp -i skaya.pem Projects/Insta-bot/insta-bot.sh ec2-user@54.91.51.176:~/projects/skaya-labs/
+ssh -i skaya.pem ec2-user@52.87.181.117
+```
+
+If permission error:
+```bash
+chmod 400 skaya.pem
+```
+
+### To manually transfer files, use:
+
+```bash
+scp -i skaya.pem Projects/Insta-bot/insta-bot.sh ec2-user@52.87.181.117:~/projects/skaya-labs/
 ```
