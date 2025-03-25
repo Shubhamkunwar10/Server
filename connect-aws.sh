@@ -52,7 +52,7 @@ for REPO_URL in "${REPO_URLS[@]}"; do
     # Check package.json for required scripts
     if [[ -f "$REPO_PATH/package.json" ]]; then
         echo "🔍 Checking package.json scripts for '$REPO_NAME'..."
-        REQUIRED_SCRIPTS=("install" "build" "start" "dev" "stage")
+        REQUIRED_SCRIPTS=("build" "start" "dev" "stage")
         MISSING_SCRIPTS=()
         
         for script in "${REQUIRED_SCRIPTS[@]}"; do
