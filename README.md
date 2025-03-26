@@ -5,6 +5,8 @@
 
 2. Use Your Own Repositories: Specify custom repositories in the configuration file and deploy your own projects.
 
+3. Use Skaya custom SDK : To create automated documentation
+
 ## Deployment Script
 
 This script automates the process of cloning GitHub repositories, setting up a project directory, and deploying it to an EC2 instance. It uses a configuration file (`config.cfg`) to eliminate manual inputs.
