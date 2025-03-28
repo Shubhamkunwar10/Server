@@ -1,4 +1,3 @@
-Update installers file:
 #!/bin/bash
 
 # Update system packages
@@ -20,3 +19,11 @@ node -v
 npm -v
 
 echo "Node.js and npm installation completed successfully!"
+
+# Install nohup (typically included in coreutils)
+sudo yum install -y coreutils
+
+# Verify nohup installation
+nohup --version
+
+echo "nohup installation completed successfully!"

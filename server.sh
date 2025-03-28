@@ -141,7 +141,7 @@ if [[ "$USE_AWS" == "true" ]]; then
                 esac
                 
                 echo "🚀 Starting \$(basename "\$repo") in $ENVIRONMENT mode using '\$RUN_SCRIPT'..."
-                npm run \$RUN_SCRIPT > /dev/null 2>&1 &
+                nohup npm run \$RUN_SCRIPT > "\$repo/nohup.out" 2>&1 &
             fi
         done
         
@@ -175,9 +175,8 @@ else
                     RUN_SCRIPT="start"
                     ;;
             esac
-            
-            echo "🚀 Starting '$REPO_NAME' in $ENVIRONMENT mode using '$RUN_SCRIPT'..."
-            npm run $RUN_SCRIPT
+            echo "🚀 Starting '$REPO_NAME' using nohup..."
+            nohup npm run $RUN_SCRIPT > "$REPO_PATH/nohup.out" 2>&1 &
         fi
     done
     echo "✅ All repositories are running locally!"
